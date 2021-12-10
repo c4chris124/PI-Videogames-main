@@ -89,7 +89,8 @@ router.post('/', async (req, res, next) => {
             image,
             description,
             releaseDate,
-            rating
+            rating,
+            platforms
         })
     } catch (error) {
         next(error)
