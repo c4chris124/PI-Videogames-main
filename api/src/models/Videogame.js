@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     description: {
       type: DataTypes.STRING,
@@ -29,7 +29,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER
     },
     platforms: {
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
-  });
+  }, {
+    timestamps: false
+  })
 };

@@ -1,39 +1,46 @@
+const { default: axios } = require('axios');
 const { Router } = require('express');
+const {API_KEY} = process.env
+const { Gender } = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const { Gender } = require('../db')
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+// initiating server and getting genders and saving them into my database, in order to use them from my database
+const handleGenders = async () => {
+    let gendersPromiseApi
+    try {
+        gendersPromiseApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+        let genders = gendersPromiseApi.data.results.map( async (gender) => {
+            const saveGenders = await Gender.create({
+                id: gender.id,
+                name: gender.name,
+                image_background: gender.image_background
+            })
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+handleGenders()
+
 router.get('/', async (req, res, next) => {
     try {
-        const genders = await Gender.findAll()
+        let genders = await Gender.findAll(
+            {
+            order: [
+                ['name', 'ASC']
+            ]
+        }
+        )
         res.send(genders)
     } catch (error) {
         next(error)
     }
 })
-router.post('/', async (req, res, next) => {
-try {
-    const { name, image_background } = req.body
-    const newGender = await Gender.create({
-        name,
-        image_background
-    })
-    res.status(201).send(newGender)
-} catch (error) {
-    next(error)
-}
-})
-router.put('/', (req, res, next) => {
-    res.send("I'm put genders")
-})
-router.delete('/', (req, res, next) => {
-    res.send("I'm delete genders")
-})
-
 
 module.exports = router;

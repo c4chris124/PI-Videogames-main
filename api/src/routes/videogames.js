@@ -14,7 +14,6 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res, next) => {
-
     let {name} = req.query
     let videogamePromiseApi
     let videogamesDB
@@ -57,6 +56,7 @@ router.get('/', async (req, res, next) => {
                     platforms: game.platforms
                 }
             })
+            
             let allGames = [...filteredGames, ...videogamesDB] //concat data
             res.send(allGames)
         })
@@ -75,7 +75,7 @@ router.get('/:id', async (req, res, next) => { //to get videogame
             let response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
             games = response.data
         }
-        return res.status(201).send(games)
+        res.send(games)
     } catch (error) {
         next(error)
     }
@@ -97,25 +97,17 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.post('/:videogameId/gender/:genderId', async (req, res, next) => {
+// relation game and gender
+router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
     try {
         const {videogameId, genderId} = req.params
         const videogame = await Videogame.findByPk(videogameId)
         await videogame.addGender(genderId) //mixins sequelize add+(table name)
-        res.send(200)
+        res.sendStatus(200)
     } catch (error) {
         next(error)        
     }
 
 })
-
-
-router.put('/', (req, res, next) => {
-    res.send("I'm put videogames")
-})
-router.delete('/', (req, res, next) => {
-    res.send("I'm delete videogames")
-})
-
 
 module.exports = router;
