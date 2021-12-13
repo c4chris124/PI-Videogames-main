@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
             ]
         })
     } else {
-        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`) //promise
+        videogamePromiseApi = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`) //promise
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender
         })
