@@ -15,7 +15,7 @@ const handleGenders = async () => {
     let gendersPromiseApi
     try {
         gendersPromiseApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-        const {data} = gendersPromiseApi
+        const { data } = gendersPromiseApi
         data.results.map(async (gender) => (
             await Gender.create({
                 id: gender.id,
