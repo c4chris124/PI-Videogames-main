@@ -1,0 +1,31 @@
+.container{
+    display: grid;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.card_image{
+    width: 100%;
+    border-radius: 12px;
+    height: 214px;
+}
+
+.card{
+    background-color: white;
+    border: 1px solid #bacdd8;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.card_name{
+    font-size: 24px;
+    font-weight: 600;
+  
+    margin-top: 16px;
+}
+
+p{
+    font-size: 14px;
+  color: #7f8c9b;
+  line-height: 150%;
+}
