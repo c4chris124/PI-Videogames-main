@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     let videogamePromiseApi
     let videogamesDB
     if (name) {
-        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
+        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=15`)
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender,
             where: {
@@ -53,7 +53,8 @@ router.get('/', async (req, res, next) => {
                     background_image: game.background_image,
                     released: game.released,
                     rating: game.ratings_count,
-                    platforms: game.platforms
+                    platforms: game.platforms,
+                    genres: game.genres.map((g) => g.name).join(', ')
                 }
             })
             
