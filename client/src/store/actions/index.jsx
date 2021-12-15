@@ -1,22 +1,34 @@
 import axios from "axios"
 
 export const FETCH_GAMES = "FETCH_GAMES"
+export const FETCH_GAME = "FETCH_GAME"
 export const FETCH_GENDERS = "FETCH_GENDERS"
 
-export function fetchGames() {
-    return function (dispatch) {
-        axios.get("http://localhost:3001/api/videogames/")
-        .then((games) => {
-            dispatch({ //instead of returning the object i dispatch it at once 
-                type: FETCH_GAMES,
-                payload: games.data
-            })
+export const getGames = () => async dispatch => {
+    try {
+        const res = await fetch("http://localhost:3001/api/videogames/")
+        const data = await res.json()
+        dispatch({
+            type: FETCH_GAMES,
+            payload:data
         })
-        .catch((error) => {
-            console.log(error);
-        })
+    } catch (error) {
+        console.log(error);
     }
-} 
+}
+
+export const getGamesById = (id) => async dispatch => {
+    try {
+        const res = await fetch(`http://localhost:3001/api/videogames/${id}`)
+        const data = await res.json()
+        dispatch({
+            type: FETCH_GAME,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export function fetchGenders() {
     return function(dispatch) { 

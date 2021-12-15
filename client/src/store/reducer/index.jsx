@@ -3,7 +3,9 @@ import { FETCH_GAMES, FETCH_GENDERS } from "../actions";
 const initialState = {
     videogames : [],
     filteredGames : [],
-    genders: []
+    genres: [],
+    error:null,
+    loading: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -16,7 +18,7 @@ export default function reducer(state = initialState, action) {
         case FETCH_GENDERS:
             return {
                 ...state,
-                genders: action.payload
+                genres: action.payload
             }
 
         default:
