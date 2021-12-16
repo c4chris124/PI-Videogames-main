@@ -1,11 +1,11 @@
 import React from 'react'
 import style from './Videogame.module.css'
 
-function Videogame({ name, image, genres }) {
+function VideogameCard({ name, image, genres }) {
     return (
         <div className={style.container}>
             <div className={style.card}>
-                <img className={style.card_image} src={image} alt="game picture"/>
+                <img className={style.card_image} src={image} alt="gameback"/>
                 <div className={style.card_details}>
                     <div className={style.card_name}>{name}</div>
                     <p>{genres}</p>
@@ -15,5 +15,4 @@ function Videogame({ name, image, genres }) {
     )
 }
 
-export default Videogame
-// 1:54
+export default VideogameCard

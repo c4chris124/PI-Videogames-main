@@ -75,7 +75,7 @@ router.get('/', async (req, res, next) => {
                     released: game.released,
                     rating: game.ratings_count,
                     platforms: game.platforms,
-                    genres: game.genres.map((g) => g.name).join(', ')
+                    genres: game.genres.map((g) => g.name)
                 }
             })
             

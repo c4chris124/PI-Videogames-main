@@ -3,6 +3,8 @@ import axios from "axios"
 export const FETCH_GAMES = "FETCH_GAMES"
 export const FETCH_GAME = "FETCH_GAME"
 export const FETCH_GENDERS = "FETCH_GENDERS"
+export const FILTER_BY_GENDERS = "FILTER_BY_GENDERS"
+export const FILTER_CREATED_DB = FILTER_CREATED_DB
 
 export const getGames = () => async dispatch => {
     try {
@@ -30,7 +32,7 @@ export const getGamesById = (id) => async dispatch => {
     }
 }
 
-export function fetchGenders() {
+export function getGenders() {
     return function(dispatch) { 
         axios.get("http://localhost:3001/api/genders/")
         .then((gender) => {
@@ -45,6 +47,16 @@ export function fetchGenders() {
     }
 }
 
-export function searchGames() {
-    
+export function filterGamesByGenders(payload) {
+    return {
+        type: FILTER_BY_GENDERS,
+        payload
+    }
+}
+
+export function filterCreatedDB(payload) {
+    return{
+        type: FILTER_CREATED_DB,
+        payload
+    }
 }
