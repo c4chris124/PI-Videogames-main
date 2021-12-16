@@ -8,7 +8,7 @@ const {API_KEY} = process.env;
 // Ejemplo: const authRouter = require('./auth.js');
 
 // page handler page by default just show 20 result per page
-const pageHandler = async () => {
+const pageHandler = async (next) => {
 try {
     let firstPage = [], secondPage = [], thirdPage = []
     firstPage = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
@@ -25,7 +25,8 @@ try {
     const results =  [...firstPage, ...secondPage, ...thirdPage]
     return results
 } catch (error) {
- console.log(error);  
+    // pass a parameter handler error
+ next(error)
 }
 }
 
@@ -58,7 +59,7 @@ router.get('/', async (req, res, next) => {
     }
         Promise.all([
             // promise function
-            pageHandler(),
+            pageHandler(next),
             videogamesDB
         ])
         .then((response) => {
