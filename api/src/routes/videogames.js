@@ -7,6 +7,27 @@ const {API_KEY} = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
+// page handler page by default just show 20 result per page
+const pageHandler = async () => {
+try {
+    let firstPage = [], secondPage = [], thirdPage = []
+    firstPage = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
+    let urlNext = firstPage.data.next
+    //i have to match it, to have the variable with data and the use it
+    firstPage = [...firstPage.data.results]
+    // continue with second page getting urlNext from first page
+    secondPage = await axios.get(urlNext)
+    urlNext = secondPage.data.next
+    secondPage = [...secondPage.data.results]
+    // third page 
+    thirdPage = await axios.get(urlNext)
+    thirdPage = [...thirdPage.data.results]
+    const results =  [...firstPage, ...secondPage, ...thirdPage]
+    return results
+} catch (error) {
+ console.log(error);  
+}
+}
 
 const router = Router();
 
@@ -18,7 +39,7 @@ router.get('/', async (req, res, next) => {
     let videogamePromiseApi
     let videogamesDB
     if (name) {
-        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=15`)
+        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`) //&page_size=15
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender,
             where: {
@@ -31,22 +52,21 @@ router.get('/', async (req, res, next) => {
             ]
         })
     } else {
-        videogamePromiseApi = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`) //promise
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender
         })
     }
         Promise.all([
-            videogamePromiseApi,
+            // promise function
+            pageHandler(),
             videogamesDB
         ])
         .then((response) => {
             const [
-                videogamePromiseApi, //API response
+                results, //API response
                 videogamesDB // DB response
             ] = response
-            let games = []
-            let filteredGames = videogamePromiseApi.data.results.map((game) => {
+            let filteredGames = results.map((game) => {
                 return { //remove unnecessary data
                     id: game.id,
                     name: game.name,
