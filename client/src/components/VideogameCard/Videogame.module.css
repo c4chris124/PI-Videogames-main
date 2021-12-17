@@ -1,21 +1,21 @@
-.container{
-    display: grid;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.card_image{
-    width: 100%;
-    border-radius: 12px;
-    height: 214px;
-}
-
 .card{
     background-color: white;
     border: 1px solid #bacdd8;
     padding: 8px;
     border-radius: 12px;
+    padding: 20px;
+    width: 480px;
+    height: 600px;
+    margin: 0 auto;
 }
+
+.card_image{
+
+    width: 100%;
+    border-radius: 12px;
+    height: 80%;
+}
+
 
 .card_name{
     font-size: 24px;

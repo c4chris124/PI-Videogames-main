@@ -4,7 +4,9 @@ export const FETCH_GAMES = "FETCH_GAMES"
 export const FETCH_GAME = "FETCH_GAME"
 export const FETCH_GENDERS = "FETCH_GENDERS"
 export const FILTER_BY_GENDERS = "FILTER_BY_GENDERS"
-export const FILTER_CREATED_DB = FILTER_CREATED_DB
+export const FILTER_CREATED_DB = "FILTER_CREATED_DB"
+export const SORT_BY_NAME = "SORT_BY_NAME"
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 
 export const getGames = () => async dispatch => {
     try {
@@ -60,3 +62,20 @@ export function filterCreatedDB(payload) {
         payload
     }
 }
+
+export function sortByName(payload) {
+    return {
+        type: SORT_BY_NAME,
+        payload
+    }
+}
+
+export function searchByName(payload){
+    return async (dispatch) => {
+        try {
+            const res = await axios.get
+        } catch (error) {
+            
+        }
+    }
+} 

@@ -1,4 +1,4 @@
-import { FETCH_GAMES, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB} from "../actions";
+import { FETCH_GAMES, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME} from "../actions";
 
 const initialState = {
     videogames : [],
@@ -30,10 +30,29 @@ export default function reducer(state = initialState, action) {
                 videogames: genderFilter
             }
         case FILTER_CREATED_DB:
-            
+            const createdDbFilter = action.payload === 'myGames' ? state.allGames.filter(g => g.id.length > 8 ) : state.allGames.filter(g => g.id.length < 8)
             return{
-
+                ...state,
+                videogames: action.payload === 'All' ? state.allGames : createdDbFilter
             }
+        case SORT_BY_NAME: 
+        let sortedByName = action.payload === 'asc' 
+        // sort works receives a callback that compares 2 values
+            ? state.videogames.sort((a,b) => {
+                if(a.name > b.name) return 1
+                if(b.name > a.name) return -1
+                return 0
+            })
+            : state.videogames.sort((a, b) => {
+                if(a.name > b.name) return -1
+                if(b.name > a.name) return 1
+                return 0
+            })
+
+        return{
+            ...state,
+            videogames: sortedByName
+        }
         default:
             return state
     }

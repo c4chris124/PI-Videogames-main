@@ -3,7 +3,7 @@ import style from './Videogame.module.css'
 
 function VideogameCard({ name, image, genres }) {
     return (
-        <div className={style.container}>
+        // <div className={style.container}>
             <div className={style.card}>
                 <img className={style.card_image} src={image} alt="gameback"/>
                 <div className={style.card_details}>
@@ -11,7 +11,7 @@ function VideogameCard({ name, image, genres }) {
                     <p>{genres}</p>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
