@@ -73,9 +73,13 @@ export function sortByName(payload) {
 export function searchByName(payload){
     return async (dispatch) => {
         try {
-            const res = await axios.get
+            const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+            return dispatch({
+                type: SEARCH_BY_NAME,
+                payload: res.data
+            })
         } catch (error) {
-            
+            console.log(error);
         }
     }
 } 
