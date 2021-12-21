@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getGenders, filterGamesByGenders, filterCreatedDB, sortByName } from '../../store/actions'
 import styles from './Filters.module.css'
-function Filters({setCurrentPage, setOrder}) {
+function Filters({ setCurrentPage, setOrder }) {
     let genders = useSelector((state) => state.genders)
     let dispatch = useDispatch()
     useEffect(() => {
@@ -44,7 +44,7 @@ function Filters({setCurrentPage, setOrder}) {
                     })}
                 </select>
             </label>
-            
+
             <label>
                 <select onChange={e => hadleFilterCreatedDb(e)}>
                     <option hidden> My Filters </option>

@@ -1,33 +1,32 @@
+
 .selectdiv{
     display: grid;
-    grid-area: header;
-    grid-column-start: col-start 3;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto;
     float: left;
     margin: 50px 33%;
     min-width: 200px;
     position: relative;
 }
 
-/* select::-ms-expand {
+select::-ms-expand {
     display: none;
-    } */
+    }
 
-    .selectdiv :after {
+    .selectdiv ::after {
         content: '<>';
-        font: 17px "Consolas", monospace;
+        font: 16px monospace;
         color: black;
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
         transform: rotate(90deg);
         right: 11px;
-        /*Adjust for position however you want*/
         
         top: 18px;
         padding: 0 0 2px;
         border-bottom: 1px solid #999;
-        /*left line */
-        
+
         position: absolute;
         pointer-events: none;
       }
@@ -36,8 +35,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        /* Add some styling */
-        
+        border-radius: 10px;
         display: block;
         width: 100%;
         max-width: 320px;
