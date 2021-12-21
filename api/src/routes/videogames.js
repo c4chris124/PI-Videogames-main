@@ -1,33 +1,34 @@
 require('dotenv').config();
 const { Router } = require('express');
-const {Op} = require('sequelize')
+const { Op } = require('sequelize')
 const axios = require('axios')
-const {Videogame, Gender} = require('../db')
-const {API_KEY} = process.env;
+const { Videogame, Gender } = require('../db')
+const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
 // page handler page by default just show 20 result per page
 const pageHandler = async (next) => {
-try {
-    let firstPage = [], secondPage = [], thirdPage = []
-    firstPage = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
-    let urlNext = firstPage.data.next
-    //i have to match it, to have the variable with data and the use it
-    firstPage = [...firstPage.data.results]
-    // continue with second page getting urlNext from first page
-    secondPage = await axios.get(urlNext)
-    urlNext = secondPage.data.next
-    secondPage = [...secondPage.data.results]
-    // third page 
-    thirdPage = await axios.get(urlNext)
-    thirdPage = [...thirdPage.data.results]
-    const results =  [...firstPage, ...secondPage, ...thirdPage]
-    return results
-} catch (error) {
-    // pass a parameter handler error
- next(error)
-}
+    try {
+        let firstPage = [], secondPage = [], thirdPage = []
+        firstPage = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
+        let urlNext = firstPage.data.next
+        //i have to match it, to have the variable with data and the use it
+        firstPage = [...firstPage.data.results]
+        // continue with second page getting urlNext from first page
+        secondPage = await axios.get(urlNext)
+        urlNext = secondPage.data.next
+        secondPage = [...secondPage.data.results]
+        // third page 
+        thirdPage = await axios.get(urlNext)
+        thirdPage = [...thirdPage.data.results]
+        return [...firstPage, ...secondPage, ...thirdPage]
+        // const results =  [...firstPage, ...secondPage, ...thirdPage]
+        // return results
+    } catch (error) {
+        // pass a parameter handler error
+        next(error)
+    }
 }
 
 const router = Router();
@@ -36,11 +37,11 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res, next) => {
-    let {name} = req.query
+    let name = req.query.name
     let videogamePromiseApi
     let videogamesDB
     if (name) {
-        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`) //&page_size=15
+        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`).then((results) => {return results.data.results})
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender,
             where: {
@@ -48,26 +49,27 @@ router.get('/', async (req, res, next) => {
                     [Op.iLike]: "%" + name + "%" //
                 }
             },
-            order:[
+            order: [
                 ['name', 'ASC']
             ]
         })
     } else {
+        videogamePromiseApi = pageHandler(next)
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender
         })
     }
-        Promise.all([
-            // promise function
-            pageHandler(next),
-            videogamesDB
-        ])
+    Promise.all([
+        // promise function
+        videogamePromiseApi,
+        videogamesDB
+    ])
         .then((response) => {
             const [
-                results, //API response
+                videogamePromiseApi, //API response
                 videogamesDB // DB response
             ] = response
-            let filteredGames = results.map((game) => {
+            let filteredGames = videogamePromiseApi.map((game) => {
                 return { //remove unnecessary data
                     id: game.id,
                     name: game.name,
@@ -78,7 +80,7 @@ router.get('/', async (req, res, next) => {
                     genres: game.genres.map((g) => g.name)
                 }
             })
-            
+
             let allGames = [...filteredGames, ...videogamesDB] //concat data
             res.send(allGames)
         })
@@ -87,7 +89,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => { //to get videogame  
     try {
-        const {id} = req.params
+        const { id } = req.params
         let games
         if (typeof id === 'string' && id.length > 8) {
             //if is from my DB
@@ -105,7 +107,7 @@ router.get('/:id', async (req, res, next) => { //to get videogame
 
 router.post('/', async (req, res, next) => {
     try {
-        const {name, background_image, description, releaseDate, rating, platforms} = req.body
+        const { name, background_image, description, releaseDate, rating, platforms } = req.body
         const newVideogame = await Videogame.create({
             name,
             background_image,
@@ -122,12 +124,12 @@ router.post('/', async (req, res, next) => {
 // relation game and gender
 router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
     try {
-        const {videogameId, genderId} = req.params
+        const { videogameId, genderId } = req.params
         const videogame = await Videogame.findByPk(videogameId)
         await videogame.addGender(genderId) //mixins sequelize add+(table name)
         res.sendStatus(200)
     } catch (error) {
-        next(error)        
+        next(error)
     }
 
 })
