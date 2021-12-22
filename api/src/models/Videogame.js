@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
     description: {
       type: DataTypes.STRING,
     },
-    release: {
+    released: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
