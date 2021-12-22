@@ -1,4 +1,4 @@
-import { FETCH_GAMES, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME} from "../actions";
+import { FETCH_GAMES, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME, POST_GAME} from "../actions";
 
 const initialState = {
     videogames : [],
@@ -16,6 +16,10 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 videogames: action.payload,
                 allGames: action.payload
+            }
+        case POST_GAME:
+            return{
+                ...state
             }
         case FETCH_GENDERS:
             return {

@@ -50,7 +50,7 @@ function Videogames() {
             {/* cards */}
             <div className={styles.cards}>
             {currentGame?.map((game) => {
-                return <VideogameCard key={game.id} name={game.name} image={game.background_image} genres={game.genres} />
+                return <VideogameCard key={game.id} name={game.name} image={game.background_image ? game.background_image : <img src=''></img>} genres={game.genres} />
             })}
             </div>
             

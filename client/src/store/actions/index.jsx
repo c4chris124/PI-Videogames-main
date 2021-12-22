@@ -3,6 +3,7 @@ import axios from "axios"
 export const FETCH_GAMES = "FETCH_GAMES"
 export const FETCH_GAME = "FETCH_GAME"
 export const FETCH_GENDERS = "FETCH_GENDERS"
+export const POST_GAME = "POST_GAME"
 export const FILTER_BY_GENDERS = "FILTER_BY_GENDERS"
 export const FILTER_CREATED_DB = "FILTER_CREATED_DB"
 export const SORT_BY_NAME = "SORT_BY_NAME"
@@ -18,6 +19,14 @@ export const getGames = () => async dispatch => {
         })
     } catch (error) {
         console.log(error);
+    }
+}
+
+export function postGame(payload){
+    return async (dispatch) => {
+        const res = await axios.post('http://localhost:3001/api/videogames', payload)
+        console.log(res);
+        return res
     }
 }
 

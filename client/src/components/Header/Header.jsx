@@ -7,6 +7,8 @@ function Header() {
         <nav className=''>
             <div>
                 <h1><Link to={'/videogames'}>Videogames</Link></h1>
+                <h1><Link to={'/genres'}>Genres</Link></h1>
+                <h1><Link to={'/videogames/new'}>New Game</Link></h1>
             </div>
             <SearchBar/>
         </nav>
