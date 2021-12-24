@@ -4,23 +4,23 @@ import Videogames from './components/Videogames/Videogames';
 import NewVideogame from './components/NewVideogame/NewVideogame';
 import Header from './components/Header/Header';
 import VideogameDetail from './components/VideogameDetail/VideogameDetail';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom'
 
 
 function App() {
   return (
-      <Router>
-        <div className='container'>
-        <Header/>
+    <Router>
+      <div className='container'>
+          <Header />
         <Routes>
-          <Route exact path="/" element={<LandingPage/>} />
-          <Route exact path="/videogames" element={<Videogames/>}/>
-          <Route exact path="/videogames/:id" element={<VideogameDetail/>}/>
-          <Route exact path="/videogames/new" element={<NewVideogame/>}/>
+          <Route exact path='/' element={<LandingPage/>}/>
+          <Route path="/videogames" element={<Videogames/>} /> 
+          <Route exact path="/videogames/:id" element={<VideogameDetail />} />
+          <Route exact path="/videogames/new" element={<NewVideogame />} />
           {/* edit route */}
         </Routes>
-        </div>
-      </Router>
+      </div>
+    </Router>
   );
 }
 

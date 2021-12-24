@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
     let videogamePromiseApi
     let videogamesDB
     if (name) {
-        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`).then((results) => {return results.data.results})
+        videogamePromiseApi = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`).then((results) => { return results.data.results })
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender,
             where: {
@@ -76,7 +76,7 @@ router.get('/', async (req, res, next) => {
                     background_image: game.background_image,
                     released: game.released,
                     rating: game.ratings_count,
-                    platforms: game.platforms,
+                    platforms: game.platforms.map(p => p.platform.name),
                     genres: game.genres.map((g) => g.name)
                 }
             })
@@ -91,13 +91,29 @@ router.get('/:id', async (req, res, next) => { //to get videogame
     try {
         const { id } = req.params
         let games
+        let data = []
         if (typeof id === 'string' && id.length > 8) {
             //if is from my DB
             games = await Videogame.findByPk(id)
         } else {
             // is from the API
             let response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-            games = response.data
+            const entries = Object.entries(response.data)
+            data.push(Object.fromEntries(entries))
+            
+            const gamesData = data.map((game) => {
+                return {
+                    id: game.id,
+                    name: game.name,
+                    description: game.description,
+                    released: game.released,
+                    background_image: game.background_image,
+                    rating: game.rating,
+                    platforms: game.platforms.map(p => p.platform.name).join(', '),
+                    genres: game.genres.map((g) => g.name).join(', ')
+                }
+            })
+            games = gamesData[0]
         }
         res.send(games)
     } catch (error) {
@@ -135,3 +151,20 @@ router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
 })
 
 module.exports = router;
+
+
+// const entries = Object.entries(gameDetail)
+
+// data.push(Object.fromEntries(entries))
+
+// data.map((game) => {
+//   return {
+//                         id: game.id,
+//                     name: game.name,
+//                     background_image: game.background_image,
+//                     released: game.released,
+//                     rating: game.ratings_count,
+//                     platforms: game.platforms.map(p => p.platform.name),
+//                     genres: game.genres.map((g) => g.name)
+//   }
+// })

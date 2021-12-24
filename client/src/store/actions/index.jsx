@@ -15,27 +15,6 @@ export const getGames = () => async dispatch => {
         const data = await res.json()
         dispatch({
             type: FETCH_GAMES,
-            payload:data
-        })
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export function postGame(payload){
-    return async (dispatch) => {
-        const res = await axios.post('http://localhost:3001/api/videogames', payload)
-        console.log(res);
-        return res
-    }
-}
-
-export const getGamesById = (id) => async dispatch => {
-    try {
-        const res = await fetch(`http://localhost:3001/api/videogames/${id}`)
-        const data = await res.json()
-        dispatch({
-            type: FETCH_GAME,
             payload: data
         })
     } catch (error) {
@@ -43,18 +22,41 @@ export const getGamesById = (id) => async dispatch => {
     }
 }
 
-export function getGenders() {
-    return function(dispatch) { 
-        axios.get("http://localhost:3001/api/genders/")
-        .then((gender) => {
-            dispatch({
-                type: FETCH_GENDERS,
-                payload: gender.data
+export function postGame(payload) {
+    return async (dispatch) => {
+        const res = await axios.post('http://localhost:3001/api/videogames', payload)
+        return res
+    }
+}
+
+export function getGamesById(id) {
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/api/videogames/${id}`)
+            .then((res) => {
+                dispatch({
+                    type: FETCH_GAME,
+                    payload: res.data
+                })
             })
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
+
+
+export function getGenders() {
+    return function (dispatch) {
+        axios.get("http://localhost:3001/api/genders/")
+            .then((gender) => {
+                dispatch({
+                    type: FETCH_GENDERS,
+                    payload: gender.data
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 }
 
@@ -66,7 +68,7 @@ export function filterGamesByGenders(payload) {
 }
 
 export function filterCreatedDB(payload) {
-    return{
+    return {
         type: FILTER_CREATED_DB,
         payload
     }
@@ -79,7 +81,7 @@ export function sortByName(payload) {
     }
 }
 
-export function searchByName(payload){
+export function searchByName(payload) {
     return async (dispatch) => {
         try {
             const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
@@ -92,3 +94,4 @@ export function searchByName(payload){
         }
     }
 } 
+

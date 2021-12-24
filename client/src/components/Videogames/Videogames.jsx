@@ -40,6 +40,10 @@ function Videogames() {
         dispatch(getGames())
     }
 
+    const handleOnClick = () => {
+        console.log('Click');
+    }
+
     return (
         <div className={styles.container}>
             <div>
@@ -50,7 +54,10 @@ function Videogames() {
             {/* cards */}
             <div className={styles.cards}>
             {currentGame?.map((game) => {
-                return <VideogameCard key={game.id} name={game.name} image={game.background_image ? game.background_image : <img src=''></img>} genres={game.genres} />
+                return <Link key={game.id} to={`/videogames/${game.id}`}><VideogameCard 
+                    name={game.name} 
+                    image={game.background_image ? game.background_image : <img src=''></img>} 
+                    genres={game.genres}/></Link>
             })}
             </div>
             
