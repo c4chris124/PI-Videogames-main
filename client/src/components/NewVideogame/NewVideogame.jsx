@@ -159,7 +159,8 @@ function NewVideogame() {
                 </div>
 
                 <div className={styles.button_container}>
-                    {(!errors) ? <button type="submit" className={styles.button}><span>Create</span></button> : <button type="submit" className={styles.button} disabled><span>Create</span></button>}
+                    {(!Object.keys(errors).length) ? (<button type="submit" className={styles.button}><span>Create</span></button>) : <button disabled type="submit" className={styles.button}><span>Create</span></button> }
+                    
                 </div>
             </form>
         </div>
