@@ -29,8 +29,8 @@ function Filters({ setCurrentPage, setOrder }) {
             <label>
                 <select onChange={e => handleSort(e)}>
                     <option hidden> Filters </option>
-                    <option value='asc'>Sort A-Z Ascending</option>
-                    <option value='desc'>Sort Z-A Descending</option>
+                    <option value='asc'>A - Z Ascending</option>
+                    <option value='desc'>Z - A Descending</option>
                     <option value='rtgA'>Rating Ascending</option>
                     <option value='rtgD'>Rating Descending</option>
                 </select>

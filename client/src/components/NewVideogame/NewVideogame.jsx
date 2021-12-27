@@ -3,14 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { postGame, getGenders } from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './NewVideogame.module.css'
+import validate from './Validation'
 
-
-const validate = (input) => {
-    let errors = {}
-    if (!input.name) {
-        errors.name = 'Name is required'
-    }
-}
 
 
 function NewVideogame() {
@@ -23,7 +17,7 @@ function NewVideogame() {
         name: "",
         background_image: "",
         description: "",
-        release: "",
+        released: "",
         rating: "",
         platforms: [],
         genders: []
@@ -34,9 +28,14 @@ function NewVideogame() {
     }, [])
 
     const handleChange = (e) => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
+        setInput((input) => {
+            const newInput = {
+                ...input,
+                [e.target.name]: e.target.value
+            }
+            const errors = validate(newInput)
+            setErrors(errors)
+            return newInput
         })
     }
 
@@ -66,7 +65,7 @@ function NewVideogame() {
             name: "",
             background_image: "",
             description: "",
-            release: "",
+            released: "",
             rating: "",
             platforms: [],
             genders: []
@@ -86,7 +85,7 @@ function NewVideogame() {
             ...input,
             genders: input.genders.filter((g) => g !== genre)
         })
-    } 
+    }
 
     return (
         <div className={styles.container} >
@@ -96,27 +95,31 @@ function NewVideogame() {
                 <div className={styles.form_group}>
                     <input type="text" value={input.name} required="required" name='name' onChange={e => handleChange(e)} />
                     <label htmlFor="input" className={styles.control_label}>Name</label><i className={styles.bar}></i>
-                    {/* {errors.name && (<p>{errors.name}</p>)} */}
+                    {errors.name ? (<p>{errors.name}</p>) : null}
                 </div>
 
                 <div className={styles.form_group}>
-                    <input type="text" value={input.background_image} name='background_image'  onChange={e => handleChange(e)}/>
-                    <label htmlFor="input" className={styles.control_label}>Imagen</label><i className={styles.bar}></i>
+                    <input type="text" value={input.background_image} name='background_image' onChange={e => handleChange(e)} />
+                    <label htmlFor="input" className={styles.control_label}>Imagen Link</label><i className={styles.bar} placeholder=''></i>
+                    {errors.background_image ? (<p>{errors.background_image}</p>) : null}
                 </div>
 
                 <div className={styles.form_group}>
                     <input type="text" value={input.description} required="required" name='description' onChange={e => handleChange(e)} />
                     <label htmlFor="input" className={styles.control_label}>Description</label><i className={styles.bar}></i>
+                    {errors.description ? (<p>{errors.description}</p>) : null}
                 </div>
 
                 <div className={styles.form_group}>
                     <input type="number" value={input.rating} required="required" name='rating' onChange={e => handleChange(e)} />
                     <label htmlFor="input" className={styles.control_label}>Rating</label><i className={styles.bar}></i>
+                    {errors.rating ? (<p>{errors.rating}</p>) : null}
                 </div>
 
                 <div className={styles.form_group}>
-                    <input type="date" value={input.release} required="required" name='release' onChange={e => handleChange(e)} />
+                    <input type="date" value={input.released} required="required" name='released' onChange={e => handleChange(e)} />
                     <label htmlFor="select" className={styles.control_label}>Release Date</label><i className={styles.bar}></i>
+                    {errors.released ? (<p>{errors.released}</p>) : null}
                 </div>
 
                 <div className={styles.form_group}>
@@ -131,32 +134,32 @@ function NewVideogame() {
                     </select>
                     <label htmlFor="select" className={styles.control_label}>Platforms</label><i className={styles.bar}></i>
                     {/* render every option selected from select */}
-                    {input.platforms.map((p) => 
-                    <div key={p}>
-                        <p>{p}</p><button onClick={() => handleDeletePlatforms(p)}>x</button>
-                    </div>
+                    {input.platforms.map((p) =>
+                        <div key={p}>
+                            <p>{p}</p><button onClick={() => handleDeletePlatforms(p)}>x</button>
+                        </div>
                     )}
                 </div>
 
                 <div className={styles.form_group}>
                     <select onChange={e => handleSelectGenders(e)}>
-                    <option hidden> Select </option>
+                        <option hidden> Select </option>
                         {genders.map((g) => (
                             <option key={g.id} value={g.name}>{g.name}</option>
                         ))}
                     </select>
                     <label htmlFor="select" className={styles.control_label}>Genres</label><i className={styles.bar}></i>
                     {/* render every option selected from select */}
-                    {input.genders.map((g) => 
-                     <div key={g}>
-                         <p>{g}</p>
-                         <button onClick={() => handleDeleteGenders(g)}>x</button>
-                     </div>
+                    {input.genders.map((g) =>
+                        <div key={g}>
+                            <p>{g}</p>
+                            <button onClick={() => handleDeleteGenders(g)}>x</button>
+                        </div>
                     )}
                 </div>
 
                 <div className={styles.button_container}>
-                    <button type="submit" className={styles.button}><span>Create</span></button>
+                    {(!errors) ? <button type="submit" className={styles.button}><span>Create</span></button> : <button type="submit" className={styles.button} disabled><span>Create</span></button>}
                 </div>
             </form>
         </div>
