@@ -1,25 +1,25 @@
 import React, {useEffect} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {getGamesById} from '../../store/actions'
-
+import {getGamesById, loadingAction} from '../../store/actions'
+import LoadingGame from './LoadingGame'
  
 function VideogameDetail() {
 
     const dispatch = useDispatch()
+    let loading = useSelector((state) => state.loading)
     const {id} = useParams()
 
     useEffect(() => {
         dispatch(getGamesById(id))
+        dispatch(loadingAction(true))
     }, [dispatch])
 
     const myVideogame = useSelector((state) => state.videogame)
-    console.log(myVideogame);
     return (
         <div>
-            {console.log(myVideogame)}
             <Link to={'/videogames'}>Back</Link>
-            {myVideogame ?
+            {!loading ?
             <div>
                 <img src={myVideogame.background_image} alt="" />
                 <h1>{myVideogame.name}</h1> 
@@ -29,7 +29,7 @@ function VideogameDetail() {
                 <p>{myVideogame.platforms}</p>
                 <p>{myVideogame.genres}</p>
             </div>   
-            :  <div><p>Loading...</p></div>
+            :  <LoadingGame/>
         }
         </div>
     )

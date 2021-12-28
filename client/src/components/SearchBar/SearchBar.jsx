@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { searchByName } from '../../store/actions'
+import { searchByName, loadingAction } from '../../store/actions'
 import styles from './SearchBar.module.css'
 
 function SearchBar() {
@@ -15,6 +15,7 @@ function SearchBar() {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(searchByName(name))
+        dispatch(loadingAction(true))
         // reset input value
         setName('')
     }

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getGames, fetchGenders } from '../../store/actions'
+import { getGames, fetchGenders, loadingAction } from '../../store/actions'
 import VideogameCard from '../VideogameCard/VideogameCard'
 import { Link } from 'react-router-dom'
 import Filters from '../Filters/Filters'
 import Pagination from '../Pagination/Pagination'
 import styles from './Videogames.module.css'
+import LoadingGames from './LoadingGames'
+
 
 function Videogames() {
     let games = useSelector((state) => state.videogames)
+    let loading = useSelector((state) => state.loading)
     const [videogames, setVideogames] = useState([])
     // order and render in case the filter needs it
     const [order, setOrder] = useState('')
     const [currentpage, setCurrentPage] = useState(1)
     // pagination 15 per page
-    const [GamesPerPage, setGamesPerPage] = useState(15)
+    const [GamesPerPage] = useState(15)
 
     // get current videogames, by getting indexes
 
@@ -29,6 +32,7 @@ function Videogames() {
     let dispatch = useDispatch()
     useEffect(() => {
         dispatch(getGames())
+        dispatch(loadingAction(true))
         setVideogames(games)
     }, [])
 
@@ -38,6 +42,7 @@ function Videogames() {
     const handleReload = (e) => {
         e.preventDefault()
         dispatch(getGames())
+        dispatch(loadingAction(true))
     }
 
     const handleOnClick = () => {
@@ -52,15 +57,20 @@ function Videogames() {
                 <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} />
             </div>
             {/* cards */}
-            <div className={styles.cards}>
-            {currentGame?.map((game) => {
-                return <Link key={game.id} to={`/videogames/${game.id}`}><VideogameCard 
-                    name={game.name} 
-                    image={game.background_image ? game.background_image : <img src=''></img>} 
-                    genres={game.genres}/></Link>
-            })}
-            </div>
-            
+            {!loading
+                ? 
+                <div className={styles.cards}>
+                    {currentGame?.map((game) => {
+                        return <Link key={game.id} to={`/videogames/${game.id}`}><VideogameCard
+                            name={game.name}
+                            image={game.background_image ? game.background_image : <img src=''></img>}
+                            genres={game.genres} /></Link>
+                    })}
+                </div>
+                :
+                <LoadingGames/>
+                
+            }
             <div>
                 <Pagination gamesPerPage={GamesPerPage} Games={games.length} pagination={pagination} />
             </div>

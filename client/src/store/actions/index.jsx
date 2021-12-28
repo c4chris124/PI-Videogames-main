@@ -8,6 +8,7 @@ export const FILTER_BY_GENDERS = "FILTER_BY_GENDERS"
 export const FILTER_CREATED_DB = "FILTER_CREATED_DB"
 export const SORT_BY_NAME = "SORT_BY_NAME"
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
+export const LOADING_ACTION = "LOADING_ACTION"
 
 export const getGames = () => async dispatch => {
     try {
@@ -17,6 +18,7 @@ export const getGames = () => async dispatch => {
             type: FETCH_GAMES,
             payload: data
         })
+        dispatch(loadingAction(false))
     } catch (error) {
         console.log(error);
     }
@@ -37,6 +39,7 @@ export function getGamesById(id) {
                     type: FETCH_GAME,
                     payload: res.data
                 })
+                dispatch(loadingAction(false))
             })
             .catch((error) => {
                 console.log(error);
@@ -51,7 +54,7 @@ export function getGenders() {
             .then((gender) => {
                 dispatch({
                     type: FETCH_GENDERS,
-                    payload: gender.data
+                    payload: gender.data,  
                 })
             })
             .catch((error) => {
@@ -85,13 +88,21 @@ export function searchByName(payload) {
     return async (dispatch) => {
         try {
             const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
-            return dispatch({
+            dispatch({
                 type: SEARCH_BY_NAME,
-                payload: res.data
+                payload: res.data,
+                
             })
+            dispatch(loadingAction(false))
         } catch (error) {
             console.log(error);
         }
     }
 } 
 
+export function loadingAction(payload) {
+    return {
+        type: LOADING_ACTION,
+        payload
+    }
+}

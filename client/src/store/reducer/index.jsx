@@ -1,4 +1,4 @@
-import { FETCH_GAMES, FETCH_GAME, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME, POST_GAME } from "../actions";
+import { FETCH_GAMES, FETCH_GAME, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME, POST_GAME, LOADING_ACTION } from "../actions";
 
 const initialState = {
     videogames: [],
@@ -72,8 +72,6 @@ export default function reducer(state = initialState, action) {
                     return 0
                   })
             }
-
-
             return {
                 ...state,
                 videogames: sortedByName
@@ -83,6 +81,12 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 videogames: action.payload
             }
+        case LOADING_ACTION: {
+            return {
+                ...state,
+                loading: action.payload
+            }
+        }
         default:
             return state
     }
