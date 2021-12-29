@@ -1,31 +1,27 @@
-.card{
-    background-color: white;
-    border: 1px solid #bacdd8;
-    padding: 8px;
-    border-radius: 12px;
-    padding: 20px;
-    width: 480px;
-    height: 600px;
-    margin: 0 auto;
-}
+.border {
+    height: 369px;
+    width: 290px;
+    background: transparent;
+    border-radius: 10px;
+    transition: border 1s;
+    position: relative;
+  }
 
-.card_image{
+  .border:hover {
+    border: 1px solid #fff;
+  }
 
-    width: 100%;
-    border-radius: 12px;
-    height: 80%;
-}
-
-
-.card_name{
-    font-size: 24px;
-    font-weight: 600;
-  
-    margin-top: 16px;
-}
-
-p{
-    font-size: 14px;
-  color: #7f8c9b;
-  line-height: 150%;
-}
+  .card {
+    height: 379px;
+    width: 300px;
+    background: #808080;
+    border-radius: 10px;
+    transition: background 0.8s;
+    overflow: hidden;
+    background: #000 center center no-repeat;
+    box-shadow: 0 70px 63px -60px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }

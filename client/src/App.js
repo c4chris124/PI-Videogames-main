@@ -16,7 +16,7 @@ function App() {
       <Navbar/>
         <Routes>
           <Route exact path='/' element={<Header/>}/>
-          <Route path="/videogames" element={<Navbar/>, <Videogames/>} /> 
+          <Route path="/videogames" element={<Videogames/>} /> 
           <Route exact path="/videogames/:id" element={<VideogameDetail />} />
           <Route exact path="/videogames/new" element={<NewVideogame />} />
           {/* edit route */}

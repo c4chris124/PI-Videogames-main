@@ -32,6 +32,7 @@ const pageHandler = async (next) => {
 }
 
 const router = Router();
+const backup = require('../../db/db.json')
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -54,7 +55,8 @@ router.get('/', async (req, res, next) => {
             ]
         })
     } else {
-        videogamePromiseApi = pageHandler(next)
+        videogamePromiseApi = backup.results
+        // videogamePromiseApi = pageHandler(next)
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender
         })

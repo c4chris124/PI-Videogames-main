@@ -49,6 +49,10 @@ function Videogames() {
         console.log('Click');
     }
 
+    let games2 = [
+        
+    ]
+
     return (
         <div className={styles.container}>
             <div>
