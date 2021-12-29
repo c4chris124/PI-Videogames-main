@@ -1,16 +1,26 @@
 .container {
-    display: grid;
-    grid-auto-rows: auto;
-    grid-gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container button{
+    background:#FF4820;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 100px;
+    align-self: flex-end;
+    margin-right: 20px;
 }
 
 .cards {
     display: grid;
-    /* grid-template-columns: repeat(3, 1fr); */
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
-    grid-gap: 0.5rem;
-    align-items: stretch;
+    grid-gap: 2rem;
 }
 
 /* .cards >div:nth-child(1){

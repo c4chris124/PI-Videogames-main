@@ -16,7 +16,7 @@ select::-ms-expand {
     .selectdiv ::after {
         content: '<>';
         font: 16px monospace;
-        color: black;
+        color: #fff;
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
@@ -44,11 +44,12 @@ select::-ms-expand {
         margin: 5px 0px;
         padding: 0px 24px;
         font-size: 16px;
+        font-family: var(--font-family);
         text-align: left;
         line-height: 1.75;
-        color: #333;
-        background-color: #ffffff;
-        border: 1px solid #cccccc;
+        color: #fff;
+        background: var(--color-footer);
+        border: 2px solid var(--color-footer);
         -ms-word-break: normal;
         word-break: normal;
       }

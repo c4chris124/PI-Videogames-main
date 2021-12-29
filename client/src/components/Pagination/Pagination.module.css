@@ -1,55 +1,33 @@
-/* .flex {
-    width: 50vw;
-    height: 80px;
-    line-height: 80px;
-    background-color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -25px 0 0 -25vw;
+.container{
+    margin-top: 50px;
 }
-
-.flex ul {
-    display: flex;
+.pagination{
+    display: inline-block;
     padding: 0;
     margin: 0;
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
 }
 
-.flex ul li {
-    flex: 1;
-    list-style: none;
-    text-align: center;
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    transition: 0.5s ease;
-    cursor: pointer;
-    user-select: none;
+.pagination li {
+    display: inline;
+
 }
 
-.flex ul li:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #f564a9;
+.pagination li a {
+    font-family: var(--font-family);
+    color: #fff;
+    background: var(--color-footer);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 2px solid var( --color-text);
+    border-radius: 5px;
 }
-.flex ul li:hover:nth-of-type(2) ~ .bar {
-    left: 20%;
+
+#active{
+    background-color: #FF4820;
 }
-.flex ul li:hover:nth-of-type(3) ~ .bar {
-    left: 40%;
+
+.pagination li a:hover{
+    background-color: #FF4820;
 }
-.flex ul li:hover:nth-of-type(4) ~ .bar {
-    left: 60%;
-}
-.flex ul li:hover:nth-of-type(5) ~ .bar {
-    left: 80%;
-}
-.flex ul .bar {
-    width: 20%;
-    background-color: #f564a9;
-    height: 5px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transition: 0.5s ease;
-} */

@@ -55,8 +55,8 @@ router.get('/', async (req, res, next) => {
             ]
         })
     } else {
-        videogamePromiseApi = backup.results
-        // videogamePromiseApi = pageHandler(next)
+        // videogamePromiseApi = backup.results
+        videogamePromiseApi = pageHandler(next)
         videogamesDB = await Videogame.findAll({ //promise
             include: Gender
         })
