@@ -52,4 +52,5 @@ select::-ms-expand {
         border: 2px solid var(--color-footer);
         -ms-word-break: normal;
         word-break: normal;
+        cursor: pointer;
       }
