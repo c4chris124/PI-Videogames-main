@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Filters from '../Filters/Filters'
 import Pagination from '../Pagination/Pagination'
 import styles from './Videogames.module.css'
-import LoadingGames from './LoadingGames'
+import Loading from '../Loading/Loading'
 import {BiRevision} from 'react-icons/bi'
 import noImage from '../assets/black.png'
 function Videogames() {
@@ -65,7 +65,7 @@ function Videogames() {
                     })}
                 </div>
                 :
-                <LoadingGames/>
+                <Loading/>
                 
             }
             <div>

@@ -1,0 +1,157 @@
+.wrapper {
+    display: grid;
+}
+.wrapper a{
+    position: absolute;
+    margin-left: 35px;
+    font-family: var(--font-family);
+    text-align: center;
+    background: #ff4820;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    width: 60px;
+    border-radius: 10px;
+}
+.container {
+    font-family: var(--font-family);
+    position: relative;
+    max-width: 40rem;
+    margin: 5rem auto;
+    background: #fff;
+    width: 100%;
+    padding: 3rem 5rem 0;
+    border-radius: 5px;
+
+    /* ff 3.6+ */
+    background: -moz-radial-gradient(
+        circle at 30% -100%,
+        #063563 25%,
+        rgba(4, 44, 84, 1) 85%,
+        rgba(27, 120, 222, 1) 100%
+    );
+
+    /* safari 5.1+,chrome 10+ */
+    background: -webkit-radial-gradient(
+        circle at 30% -100%,
+        #063563 25%,
+        rgba(4, 44, 84, 1) 85%,
+        rgba(27, 120, 222, 1) 100%
+    );
+
+    /* opera 11.10+ */
+    background: -o-radial-gradient(
+        circle at 30% -100%,
+        #063563 25%,
+        rgba(4, 44, 84, 1) 85%,
+        rgba(27, 120, 222, 1) 100%
+    );
+
+    /* ie 10+ */
+    background: -ms-radial-gradient(
+        circle at 30% -100%,
+        #063563 25%,
+        rgba(4, 44, 84, 1) 85%,
+        rgba(27, 120, 222, 1) 100%
+    );
+
+    /* global 92%+ browsers support */
+    background: radial-gradient(circle at 30% -100%, #063563 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+.form h1 {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 75px;
+    letter-spacing: -0.04em;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form_group {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-gap: 2px;
+    position: relative;
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+}
+
+.form_group label {
+    color: var( --color-text);
+}
+
+.form_group input {
+    padding: 3px;
+    border-radius: 5px;
+    font-family: var(--font-family);
+    height: 1.9rem;
+}
+
+.form_group select {
+    border-radius: 5px;
+    font-family: var(--font-family);
+    height: 1.9rem;
+}
+
+.button_container {
+    text-align: center;
+}
+
+.button {
+    font-family: var(--font-family);
+    background: #ff4820;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    width: 40%;
+    min-height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.disabled{
+    background: #f8ac9a;
+    cursor:not-allowed;
+}
+
+
+.container fieldset {
+    margin: 0 0 3rem;
+    padding: 0;
+    border: none;
+}
+
+.errors {
+    font-family: var(--font-family);
+    color: rgb(255, 131, 131);
+}
+
+.selected_items {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: var(--font-family);
+    color: #fff;
+}
+
+.selected_items button {
+    margin-left: 5px;
+    background: transparent;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+    align-self: flex-end;
+    margin-right: 20px;
+}

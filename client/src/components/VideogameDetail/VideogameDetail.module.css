@@ -1,3 +1,23 @@
+.wrapper{
+    display: grid;
+}
+
+.wrapper a{
+    position: absolute;
+    margin-left: 35px;
+    font-family: var(--font-family);
+    text-align: center;
+    background: #ff4820;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    width: 60px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
 .container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);

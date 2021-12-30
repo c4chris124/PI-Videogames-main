@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGamesById, loadingAction } from '../../store/actions'
-import LoadingGame from './LoadingGame'
+import Loading from '../Loading/Loading'
 import style from './VideogameDetail.module.css'
+import {MdReply} from 'react-icons/md'
 
 function VideogameDetail() {
 
@@ -19,8 +20,8 @@ function VideogameDetail() {
     const myVideogame = useSelector((state) => state.videogame)
 
     return (
-        <div>
-            <Link to={'/videogames'}>Back</Link>
+        <div className={style.wrapper}>
+            <Link to={'/videogames'}><MdReply/>Back</Link>
             {!loading ?
                 <div className={style.container}>
                     <img src={myVideogame.background_image} alt="" />
@@ -35,7 +36,7 @@ function VideogameDetail() {
                         </div>
                     </div>
                 </div>
-                : <LoadingGame />
+                : <Loading />
             }
         </div>
     )
