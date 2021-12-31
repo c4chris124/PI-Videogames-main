@@ -22,7 +22,7 @@ function NewVideogame() {
         released: "",
         rating: "",
         platforms: [],
-        genders: []
+        genders: [],
     })
 
     useEffect(() => {
@@ -53,9 +53,13 @@ function NewVideogame() {
     }
 
     const handleSelectGenders = (e) => {
+        const index = e.target.selectedIndex;
+        const el = e.target.childNodes[index]
+        const option =  el.getAttribute('id');  
+ 
         setInput({
             ...input,
-            genders: [...input.genders, e.target.value]
+            genders: [...input.genders, [option, e.target.value]]
         })
     }
 
@@ -70,7 +74,7 @@ function NewVideogame() {
             released: "",
             rating: "",
             platforms: [],
-            genders: []
+            genders: [],
         })
         navigate('/videogames')
     }
@@ -97,9 +101,10 @@ function NewVideogame() {
         })
     }
 
+
+
     return (
         <div className={styles.wrapper}>
-            {console.log(Object.values(input).length)}
             <Link to='/videogames'><MdReply/>Back</Link>
         <div className={styles.container} >
             <form onSubmit={e => handleSubmit(e)} className={styles.form}>
@@ -155,23 +160,26 @@ function NewVideogame() {
 
                 <div className={styles.form_group}>
                     <label htmlFor="select" className={styles.control_label}>Genres</label><i className={styles.bar}></i>
-                    <select onChange={e => handleSelectGenders(e)}>
+                    <select onChange={handleSelectGenders}>
                         <option hidden> Select </option>
                         {genders.map((g) => (
-                            <option key={g.id} value={g.name}>{g.name}</option>
+                            <option key={g.id} id={g.id} value={g.name}>{g.name}</option>
                         ))}
                     </select>
                     {/* render every option selected from select */}
                     {input.genders.map((g) =>
                         <div key={g} className={styles.selected_items}>
-                            <p>{g}</p>
+                            <p>{g[1]}</p>
                             <button onClick={() => handleDeleteGenders(g)}><MdHighlightOff/></button>
                         </div>
                     )}
+                    {console.log(input.genders)}
                 </div>
 
                 <div className={styles.button_container}>
-                    {(!Object.keys(errors).length && !checkProperties(input)) ? (<button type="submit" className={styles.button}><span>Create</span></button>) : <button disabled type="submit" className={`${styles.button} ${styles.disabled}`}><span>Create</span></button>}
+                    {(!Object.keys(errors).length && !checkProperties(input)) 
+                    ? (<button type="submit" className={styles.button}><span>Create</span></button>) 
+                    : <button disabled type="submit" className={`${styles.button} ${styles.disabled}`}><span>Create</span></button>}
                 </div>
             </form>
         </div>

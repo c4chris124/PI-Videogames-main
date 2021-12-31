@@ -57,11 +57,12 @@ function Videogames() {
             {!loading
                 ? 
                 <div className={styles.cards}>
+                    {console.log(currentGame)}
                     {currentGame?.map((game) => {
                         return <Link key={game.id} to={`/videogames/${game.id}`}><VideogameCard
                             name={game.name}
                             image={game.background_image ? game.background_image : <img src={noImage}></img>}
-                            genres={game.genres} /></Link>
+                            genres={(game.id.length > 7) ? game.genders.map((g) => g.name) : game.genres} /></Link>
                     })}
                 </div>
                 :

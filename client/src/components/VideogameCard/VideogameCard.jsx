@@ -2,10 +2,6 @@ import React from 'react'
 import style from './Videogame.module.css'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
-  
-`
-
 function VideogameCard({ name, image, genres }) {
 // no other choice to use styled components only for this component, could't find a way to pass image as a prop
   const Wrapper = styled.div`
@@ -49,12 +45,13 @@ function VideogameCard({ name, image, genres }) {
       <div className={style.border}>
         <h2>{name}</h2>
         <div className={style.icons}>
-          <i className={style.fa} aria-hidden="true">{genres.join(' ')}</i>
+          <i className={style.fa} aria-hidden="true">{genres ? genres.join(' ') : null}</i>
+
         </div>
       </div>
       </Wrapper>
   )
 }
-// 1:41:47
 
 export default VideogameCard
+

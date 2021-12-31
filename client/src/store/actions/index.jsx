@@ -25,7 +25,7 @@ export const getGames = () => async dispatch => {
 }
 
 export function postGame(payload) {
-    return async (dispatch) => {
+    return async () => {
         const res = await axios.post('http://localhost:3001/api/videogames', payload)
         return res
     }
@@ -54,7 +54,7 @@ export function getGenders() {
             .then((gender) => {
                 dispatch({
                     type: FETCH_GENDERS,
-                    payload: gender.data,  
+                    payload: gender.data,
                 })
             })
             .catch((error) => {
@@ -91,14 +91,14 @@ export function searchByName(payload) {
             dispatch({
                 type: SEARCH_BY_NAME,
                 payload: res.data,
-                
+
             })
             dispatch(loadingAction(false))
         } catch (error) {
             console.log(error);
         }
     }
-} 
+}
 
 export function loadingAction(payload) {
     return {

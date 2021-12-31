@@ -7,7 +7,7 @@ const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
-// page handler page by default just show 20 result per page
+// page handler page by default just show 40 result per page
 const pageHandler = async (next) => {
     try {
         let firstPage = [], secondPage = [], thirdPage = []
@@ -153,20 +153,3 @@ router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
 })
 
 module.exports = router;
-
-
-// const entries = Object.entries(gameDetail)
-
-// data.push(Object.fromEntries(entries))
-
-// data.map((game) => {
-//   return {
-//                         id: game.id,
-//                     name: game.name,
-//                     background_image: game.background_image,
-//                     released: game.released,
-//                     rating: game.ratings_count,
-//                     platforms: game.platforms.map(p => p.platform.name),
-//                     genres: game.genres.map((g) => g.name)
-//   }
-// })
