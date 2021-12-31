@@ -70,7 +70,10 @@ function Videogames() {
                 
             }
             <div>
-                <Pagination gamesPerPage={GamesPerPage} Games={games.length} pagination={pagination} currentpage={currentpage} />
+                {!loading 
+                ? <Pagination gamesPerPage={GamesPerPage} Games={games.length} pagination={pagination} currentpage={currentpage} />
+                : null
+            }
             </div>
         </div>
     )
