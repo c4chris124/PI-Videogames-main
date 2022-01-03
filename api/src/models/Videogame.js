@@ -22,8 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     released: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
+      type: DataTypes.STRING,
     },
     rating: {
       type: DataTypes.INTEGER

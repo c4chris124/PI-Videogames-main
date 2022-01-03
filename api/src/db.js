@@ -35,13 +35,9 @@ const { Videogame, Gender } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Videogame.belongsToMany(Gender, {
-  through: "VideogameGender"
-})
+Videogame.belongsToMany(Gender, {through: "VideogameGender"}, { foreignKey: 'id' })
 
-Gender.belongsToMany(Videogame, {
-  through: "VideogameGender"
-})
+Gender.belongsToMany(Videogame, {through: "VideogameGender"}, { foreignKey: 'id' })
 
 
 module.exports = {

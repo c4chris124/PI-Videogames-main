@@ -22,6 +22,7 @@ function VideogameDetail() {
     return (
         <div className={style.wrapper}>
             <Link to={'/videogames'}><MdReply/>Back</Link>
+            {console.log(myVideogame)}
             {!loading ?
                 <div className={style.container}>
                     <img src={myVideogame.background_image} alt="" />
@@ -31,7 +32,11 @@ function VideogameDetail() {
                         <div className={style.content_detail}>
                             <p><label>Released: </label>{myVideogame.released}</p>
                             <p><label>Rating: </label>{myVideogame.rating}</p>
-                            <p><label>Platforms: </label>{myVideogame.platforms}</p>
+                            {(typeof myVideogame.platforms === 'object')
+                            ? <p><label>Platforms: </label>{myVideogame.platforms.join(', ')}</p>
+                            : <p><label>Platforms: </label>{myVideogame.platforms}</p>
+                        }
+                            
                             <p><label>Genres: </label>{myVideogame.genres}</p>
                         </div>
                     </div>
