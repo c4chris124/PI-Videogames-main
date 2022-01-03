@@ -45,7 +45,7 @@ function VideogameCard({ name, image, genres }) {
       <div className={style.border}>
         <h2>{name}</h2>
         <div className={style.icons}>
-          <i className={style.fa} aria-hidden="true">{genres ? genres.join(' ') : null}</i>
+          <i className={style.fa} aria-hidden="true">{genres ? genres.join(', ') : null}</i>
 
         </div>
       </div>

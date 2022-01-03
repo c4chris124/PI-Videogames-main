@@ -32,7 +32,7 @@ const pageHandler = async (next) => {
 }
 
 const router = Router();
-const backup = require('../../db/db.json')
+// const backup = require('../../db/db.json')
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
