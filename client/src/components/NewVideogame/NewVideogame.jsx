@@ -53,13 +53,13 @@ function NewVideogame() {
     }
 
     const handleSelectGenders = (e) => {
-        const index = e.target.selectedIndex;
-        const el = e.target.childNodes[index]
-        const option =  el.getAttribute('id');  
+        // const index = e.target.selectedIndex;
+        // const el = e.target.childNodes[index]
+        // const option =  el.getAttribute('id');  
  
         setInput({
             ...input,
-            genders: [...input.genders, [option, e.target.value]]
+            genders: [...input.genders, e.target.value]
         })
     }
 
@@ -169,11 +169,11 @@ function NewVideogame() {
                     {/* render every option selected from select */}
                     {input.genders.map((g) =>
                         <div key={g} className={styles.selected_items}>
-                            <p>{g[1]}</p>
+                            {/* <p>{g[1]}</p> */}
+                            <p>{g}</p>
                             <button onClick={() => handleDeleteGenders(g)}><MdHighlightOff/></button>
                         </div>
                     )}
-                    {console.log(input.genders)}
                 </div>
 
                 <div className={styles.button_container}>

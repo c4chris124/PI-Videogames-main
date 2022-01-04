@@ -125,31 +125,40 @@ router.get('/:id', async (req, res, next) => { //to get videogame
 
 router.post('/', async (req, res, next) => {
     try {
-        const { name, background_image, description, released, rating, platforms } = req.body
+        const { name, background_image, description, released, rating, platforms, genders } = req.body
         const newVideogame = await Videogame.create({
             name,
             background_image,
             description,
             released,
             rating,
-            platforms
+            platforms,
+            genders
         })
+
+        genders?.map(async name => {
+            let search = await Gender.findAll({
+              where: { name: name },
+            });
+            newVideogame.addGender(search);
+          })
+        
     } catch (error) {
         next(error)
     }
 })
 
-// relation game and gender
-router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
-    try {
-        const { videogameId, genderId } = req.params
-        const videogame = await Videogame.findByPk(videogameId)
-        await videogame.addGender(genderId) //mixins sequelize add+(table name)
-        res.sendStatus(200)
-    } catch (error) {
-        next(error)
-    }
+// relation game and gender/ didn't work this way
+// router.post('/:videogameId/genders/:genderId', async (req, res, next) => {
+//     try {
+//         const { videogameId, genderId } = req.params
+//         const videogame = await Videogame.findByPk(videogameId)
+//         await videogame.addGender(genderId) //mixins sequelize add+(table name)
+//         res.sendStatus(200)
+//     } catch (error) {
+//         next(error)
+//     }
 
-})
+// })
 
 module.exports = router;
