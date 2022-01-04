@@ -51,6 +51,7 @@ function Filters({ setCurrentPage, setOrder }) {
                 <select onChange={e => hadleFilterCreatedDb(e)}>
                     <option hidden> My Filters </option>
                     <option value='All'>All</option>
+                    <option value='existingGames'>Existing Videogames</option>
                     <option value='myGames'>My Videogames</option>
                 </select>
             </label>

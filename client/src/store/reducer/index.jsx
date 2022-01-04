@@ -5,7 +5,6 @@ const initialState = {
     allGames: [],
     videogame: [],
     genders: [],
-    error: null,
     loading: false
 }
 
@@ -33,13 +32,13 @@ export default function reducer(state = initialState, action) {
             }
         case FILTER_BY_GENDERS:
             const allGames = state.allGames
-            const genderFilter = action.payload === 'All' ? allGames : allGames.filter((g) => g.genres.includes(action.payload))
+            const genderFilter = action.payload === 'All' ? allGames : allGames.filter((g) => g.genres?.includes(action.payload))
             return {
                 ...state,
                 videogames: genderFilter
             }
         case FILTER_CREATED_DB:
-            const createdDbFilter = action.payload === 'myGames' ? state.allGames.filter(g => g.id.length > 8) : state.allGames.filter(g => g.id.length < 8)
+            const createdDbFilter = action.payload === 'myGames' ? state.allGames.filter(g => g.id.length > 8) : state.allGames.filter(g => g.id.toString().length < 7)
             return {
                 ...state,
                 videogames: action.payload === 'All' ? state.allGames : createdDbFilter

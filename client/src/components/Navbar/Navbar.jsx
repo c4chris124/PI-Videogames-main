@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar/SearchBar'
 import styles from './Navbar.module.css'
-import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'
 
 function Navbar() {
     return (
@@ -22,12 +21,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-{/* <nav className={styles.container}>
-<div>
-    <h1><Link to={'/videogames'}>Videogames</Link></h1>
-    <h1><Link to={'/genres'}>Genres</Link></h1>
-    <h1><Link to={'/videogames/new'}>New Game</Link></h1>
-</div>
-<SearchBar/>
-</nav> */}

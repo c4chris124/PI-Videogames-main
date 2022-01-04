@@ -38,7 +38,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res, next) => {
-    let name = req.query.name
+    let {name} = req.query
     let videogamePromiseApi
     let videogamesDB
     if (name) {
