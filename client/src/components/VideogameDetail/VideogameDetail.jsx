@@ -36,8 +36,11 @@ function VideogameDetail() {
                             ? <p><label>Platforms: </label>{myVideogame.platforms.join(', ')}</p>
                             : <p><label>Platforms: </label>{myVideogame.platforms}</p>
                         }
+                        { (!myVideogame.genders) 
+                            ?  <p><label>Genres: </label>{myVideogame.genres}</p>
+                            :  <p><label>Genres: </label>{myVideogame.genders.map((g) => g.name).join(', ')}</p>
+                        }
                             
-                            <p><label>Genres: </label>{myVideogame.genres}</p>
                         </div>
                     </div>
                 </div>
