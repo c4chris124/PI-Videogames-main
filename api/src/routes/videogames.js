@@ -94,9 +94,16 @@ router.get('/:id', async (req, res, next) => { //to get videogame
         const { id } = req.params
         let games
         let data = []
+        let dataDB =  []
         if (typeof id === 'string' && id.length > 8) {
             //if is from my DB
-            games = await Videogame.findByPk(id)
+            let response = await Videogame.findOne({ //findbypk was not working with property includes: Gender
+                include: Gender,
+                where: {
+                    id: id
+                }
+            })
+            games = response.dataValues
         } else {
             // is from the API
             let response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
