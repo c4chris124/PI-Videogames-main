@@ -17,7 +17,7 @@ function Videogames() {
     const [order, setOrder] = useState('')
     const [currentpage, setCurrentPage] = useState(1)
     // pagination 15 per page
-    const [GamesPerPage] = useState(16)
+    const [GamesPerPage] = useState(15)
 
     // get current videogames, by getting indexes
 
@@ -57,7 +57,6 @@ function Videogames() {
             {!loading
                 ? 
                 <div className={styles.cards}>
-                    {console.log(currentGame)}
                     {currentGame?.map((game) => {
                         return <Link key={game.id} to={`/videogames/${game.id}`}><VideogameCard
                             name={game.name}

@@ -77,7 +77,7 @@ router.get('/', async (req, res, next) => {
                     name: game.name,
                     background_image: game.background_image,
                     released: game.released,
-                    rating: game.ratings_count,
+                    rating: game.rating,
                     platforms: game.platforms.map(p => p.platform.name),
                     genres: game.genres.map((g) => g.name)
                 }

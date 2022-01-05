@@ -1,4 +1,4 @@
-import { FETCH_GAMES, FETCH_GAME, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME, POST_GAME, LOADING_ACTION } from "../actions";
+import { FETCH_GAMES, FETCH_GAME, FETCH_GENDERS, FILTER_BY_GENDERS, FILTER_CREATED_DB, SORT_BY_NAME, SEARCH_BY_NAME, POST_GAME, LOADING_ACTION, SEARCH_TEST } from "../actions";
 
 const initialState = {
     videogames: [],
@@ -38,10 +38,11 @@ export default function reducer(state = initialState, action) {
                 videogames: genderFilter
             }
         case FILTER_CREATED_DB:
-            const createdDbFilter = action.payload === 'myGames' ? state.allGames.filter(g => g.id.length > 8) : state.allGames.filter(g => g.id.toString().length < 7)
+            const Games = state.allGames
+            const createdDbFilter = action.payload === 'myGames' ? Games.filter(g => g.id.length > 8) : Games.filter(g => g.id.toString().length < 7)
             return {
                 ...state,
-                videogames: action.payload === 'All' ? state.allGames : createdDbFilter
+                videogames: action.payload === 'All' ? state.videogames : createdDbFilter
             }
         case SORT_BY_NAME:
             var sortedByName;
@@ -86,6 +87,11 @@ export default function reducer(state = initialState, action) {
                 loading: action.payload
             }
         }
+        case SEARCH_TEST:
+            return{
+                ...state,
+                videogames: action.payload
+            }
         default:
             return state
     }

@@ -9,6 +9,7 @@ export const FILTER_CREATED_DB = "FILTER_CREATED_DB"
 export const SORT_BY_NAME = "SORT_BY_NAME"
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 export const LOADING_ACTION = "LOADING_ACTION"
+export const SEARCH_TEST = "SEARCH_TEST"
 
 export const getGames = () => async dispatch => {
     try {
@@ -84,15 +85,44 @@ export function sortByName(payload) {
     }
 }
 
+
+
+// export function searchByName(payload) {
+//     return async (dispatch) => {
+//         try {
+//             const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+//             dispatch({
+//                 type: SEARCH_BY_NAME,
+//                 payload: res.data,
+
+//             })
+//             dispatch(loadingAction(false))
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
+
 export function searchByName(payload) {
     return async (dispatch) => {
         try {
-            const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+            let res;
+            if(typeof payload === 'number'){
+                res = await axios.get(`http://localhost:3001/api/videogames`)
+                let results = res.data.filter((r) => r.rating >= payload)
+                dispatch({
+                    type: SEARCH_TEST,
+                    payload: results,
+    
+                })
+            } else {
+            res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
             dispatch({
-                type: SEARCH_BY_NAME,
+                type: SEARCH_TEST,
                 payload: res.data,
 
             })
+        }
             dispatch(loadingAction(false))
         } catch (error) {
             console.log(error);
