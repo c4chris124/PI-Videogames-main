@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "heroku-postbuild": "cd ../client && npm install && npm install --only=dev --noshrinkwrap && npm run build"
   },
   "author": "Henry",
   "license": "ISC",
