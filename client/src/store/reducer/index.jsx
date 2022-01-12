@@ -87,11 +87,6 @@ export default function reducer(state = initialState, action) {
                 loading: action.payload
             }
         }
-        case SEARCH_TEST:
-            return{
-                ...state,
-                videogames: action.payload
-            }
         default:
             return state
     }

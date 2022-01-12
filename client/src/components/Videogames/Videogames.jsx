@@ -17,7 +17,7 @@ function Videogames() {
     const [order, setOrder] = useState('')
     const [currentpage, setCurrentPage] = useState(1)
     // pagination 15 per page
-    const [GamesPerPage] = useState(15)
+    const [GamesPerPage] = useState(16)
 
     // get current videogames, by getting indexes
 

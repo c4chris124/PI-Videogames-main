@@ -87,48 +87,48 @@ export function sortByName(payload) {
 
 
 
-// export function searchByName(payload) {
-//     return async (dispatch) => {
-//         try {
-//             const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
-//             dispatch({
-//                 type: SEARCH_BY_NAME,
-//                 payload: res.data,
-
-//             })
-//             dispatch(loadingAction(false))
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// }
-
 export function searchByName(payload) {
     return async (dispatch) => {
         try {
-            let res;
-            if(typeof payload === 'number'){
-                res = await axios.get(`http://localhost:3001/api/videogames`)
-                let results = res.data.filter((r) => r.rating >= payload)
-                dispatch({
-                    type: SEARCH_TEST,
-                    payload: results,
-    
-                })
-            } else {
-            res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+            const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
             dispatch({
-                type: SEARCH_TEST,
+                type: SEARCH_BY_NAME,
                 payload: res.data,
 
             })
-        }
             dispatch(loadingAction(false))
         } catch (error) {
             console.log(error);
         }
     }
 }
+
+// export function searchByName(payload) {
+//     return async (dispatch) => {
+//         try {
+//             let res;
+//             if(typeof payload === 'number'){
+//                 res = await axios.get(`http://localhost:3001/api/videogames`)
+//                 let results = res.data.filter((r) => r.rating >= payload)
+//                 dispatch({
+//                     type: SEARCH_TEST,
+//                     payload: results,
+    
+//                 })
+//             } else {
+//             res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+//             dispatch({
+//                 type: SEARCH_TEST,
+//                 payload: res.data,
+
+//             })
+//         }
+//             dispatch(loadingAction(false))
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
 
 export function loadingAction(payload) {
     return {

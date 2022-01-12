@@ -14,7 +14,7 @@ function SearchBar() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(searchByName(parseInt(name)))
+        dispatch(searchByName(name))
         dispatch(loadingAction(true))
         // reset input value
         setName('')
