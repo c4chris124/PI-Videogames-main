@@ -13,7 +13,7 @@ export const SEARCH_TEST = "SEARCH_TEST"
 
 export const getGames = () => async dispatch => {
     try {
-        const res = await fetch("http://localhost:3001/api/videogames/")
+        const res = await fetch(`${REACT_APP_SERVER}/api/videogames/`)
         const data = await res.json()
         dispatch({
             type: FETCH_GAMES,
@@ -27,14 +27,14 @@ export const getGames = () => async dispatch => {
 
 export function postGame(payload) {
     return async () => {
-        const res = await axios.post('http://localhost:3001/api/videogames', payload)
+        const res = await axios.post(`${REACT_APP_SERVER}/api/videogames`, payload)
         return res
     }
 }
 
 export function getGamesById(id) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/api/videogames/${id}`)
+        axios.get(`${REACT_APP_SERVER}/api/videogames/${id}`)
             .then((res) => {
                 dispatch({
                     type: FETCH_GAME,
@@ -51,7 +51,7 @@ export function getGamesById(id) {
 
 export function getGenders() {
     return function (dispatch) {
-        axios.get("http://localhost:3001/api/genders/")
+        axios.get(`${REACT_APP_SERVER}/api/genders/`)
             .then((gender) => {
                 dispatch({
                     type: FETCH_GENDERS,
@@ -90,7 +90,7 @@ export function sortByName(payload) {
 export function searchByName(payload) {
     return async (dispatch) => {
         try {
-            const res = await axios.get(`http://localhost:3001/api/videogames?name=${payload}`)
+            const res = await axios.get(`${REACT_APP_SERVER}/api/videogames?name=${payload}`)
             dispatch({
                 type: SEARCH_BY_NAME,
                 payload: res.data,
@@ -103,6 +103,7 @@ export function searchByName(payload) {
     }
 }
 
+// trash code
 // export function searchByName(payload) {
 //     return async (dispatch) => {
 //         try {
